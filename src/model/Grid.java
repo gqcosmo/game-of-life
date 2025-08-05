@@ -3,7 +3,7 @@ package model;
 public class Grid {
     private final int rows;
     private final int columns;
-    private char[][] arr;
+    private final char[][] arr;
 
     public Grid(int rows, int columns) {
         this.rows = rows;
@@ -46,7 +46,7 @@ public class Grid {
         int[][] directions = {
                 {-1, -1}, {-1, 0}, {-1, 1},
                 { 0, -1},          {0,  1},
-                { 1,  1}, {1,  0}, {1,  1}
+                { 1, -1}, {1,  0}, {1,  1}
         };
 
         for (int i = 0; i < 8; ++i) {
@@ -69,10 +69,10 @@ public class Grid {
     }
 
     private void validateCoord(int row, int col) {
-        if (row < 0 || col >= rows) {
+        if (row < 0 || row >= rows) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        if (row < 0 || col >= columns) {
+        if (col < 0 || col >= columns) {
             throw new ArrayIndexOutOfBoundsException();
         }
     }

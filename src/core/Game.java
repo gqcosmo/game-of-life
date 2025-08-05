@@ -35,15 +35,19 @@ public class Game {
             }
         }
 
-        Generation firstGen = new Generation(grid);
+        Generation start = new Generation(grid);
         Generation[] gens = new Generation[numGenerations+1];
-        gens[0] = firstGen;
+        gens[0] = start;
+
+        System.out.print("Starting Civilization");
+        start.print();
+        System.out.println("\n");
 
         for (int i = 1; i <= numGenerations; ++i) {
-            System.out.println("Generation " + (i-1));
-            gens[i-1].print();
-            System.out.println("-".repeat(columns) + "\n");
+            System.out.println("Generation " + i);
             gens[i] = gens[i-1].next();
+            gens[i].print();
+            System.out.println("-".repeat(columns) + "\n");
         }
     }
 }
