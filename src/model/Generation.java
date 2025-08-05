@@ -14,15 +14,16 @@ public class Generation {
         for (int i = 0; i < grid.getRows(); ++i) {
             for (int j = 0; j < grid.getColumns(); ++j) {
                 int numNeighbors = countAliveNeighbors(i, j);
-                boolean alive = grid.at(i, j) == 'O';
+                boolean isAlive = grid.at(i, j) == 'O';
 
-                if (alive) {
-                    alive = numNeighbors == 2 || numNeighbors == 3;
+                if (isAlive) {
+                    isAlive = numNeighbors == 2 || numNeighbors == 3;
                 } else {
-                    alive = numNeighbors == 3;
+
+                    isAlive = numNeighbors == 3;
                 }
 
-                nextGrid.populate(i, j, alive ? 'O' : ' ');
+                nextGrid.populate(i, j, isAlive ? 'O' : ' ');
             }
         }
 
