@@ -11,10 +11,6 @@ public class Generation {
     public Generation next() {
         Grid nextGrid = new Grid(grid);
 
-        System.out.println("Intial");
-        grid.print();
-        System.out.print("\n");
-
         for (int i = 0; i < grid.getRows(); ++i) {
             for (int j = 0; j < grid.getColumns(); ++j) {
                 int numNeighbors = countAliveNeighbors(i, j);
@@ -30,9 +26,6 @@ public class Generation {
             }
         }
 
-        System.out.println("New");
-        nextGrid.print();
-        System.out.println("\n");
         return new Generation(nextGrid);
     }
 
