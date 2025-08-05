@@ -11,21 +11,28 @@ public class Generation {
     public Generation next() {
         Grid nextGrid = new Grid(grid);
 
+        System.out.println("Intial");
+        grid.print();
+        System.out.print("\n");
+
         for (int i = 0; i < grid.getRows(); ++i) {
             for (int j = 0; j < grid.getColumns(); ++j) {
                 int numNeighbors = countAliveNeighbors(i, j);
                 boolean alive = grid.at(i, j) == 'O';
 
                 if (alive) {
-                    alive = (numNeighbors == 2 || numNeighbors == 3) ? true : false;
+                    alive = numNeighbors == 2 || numNeighbors == 3;
                 } else {
-                    alive = (numNeighbors == 3) ? true : false;
+                    alive = numNeighbors == 3;
                 }
 
-                nextGrid.populate(i, j, (alive) ? 'O' : ' ');
+                nextGrid.populate(i, j, alive ? 'O' : ' ');
             }
         }
 
+        System.out.println("New");
+        nextGrid.print();
+        System.out.println("\n");
         return new Generation(nextGrid);
     }
 

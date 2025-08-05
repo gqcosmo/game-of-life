@@ -3,11 +3,11 @@ import java.util.Random;
 import model.*;
 
 public class Game {
-    Grid grid;
-    int rows;
-    int columns;
-    long seed;
-    int numGenerations;
+    private Grid grid;
+    private int rows;
+    private int columns;
+    private long seed;
+    private int numGenerations;
 
     public Game(int rows, int columns, long seed, int numGenerations) {
         grid = new Grid(rows, columns);
@@ -30,23 +30,19 @@ public class Game {
 
         for (int i = 0; i < rows; ++i) {
             for (int j = 0; j < columns; ++j) {
-                boolean isAlive = rd.nextBoolean();
-                grid.populate(i, j, (isAlive) ? 'O' : ' ');
+                grid.populate(i, j, rd.nextBoolean() ? 'O' : ' ');
             }
         }
 
-        Generation start = new Generation(grid);
-        Generation[] gens = new Generation[numGenerations+1];
-        gens[0] = start;
-
-        System.out.print("Starting Civilization");
-        start.print();
+        Generation currentGen = new Generation(grid);
+        System.out.println("Starting Civilization");
+        currentGen.print();
         System.out.println("\n");
 
         for (int i = 1; i <= numGenerations; ++i) {
             System.out.println("Generation " + i);
-            gens[i] = gens[i-1].next();
-            gens[i].print();
+            currentGen = currentGen.next();
+            //currentGen.print();
             System.out.println("-".repeat(columns) + "\n");
         }
     }

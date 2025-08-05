@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 public class Grid {
     private final int rows;
     private final int columns;
@@ -49,7 +51,7 @@ public class Grid {
                 { 1, -1}, {1,  0}, {1,  1}
         };
 
-        for (int i = 0; i < 8; ++i) {
+        for (int i = 0; i < directions.length; ++i) {
             int[] dir = directions[i];
             int newRow = (dir[0] + row + rows) % rows;
             int newCol = (dir[1] + col + columns) % columns;
@@ -74,22 +76,6 @@ public class Grid {
         }
         if (col < 0 || col >= columns) {
             throw new ArrayIndexOutOfBoundsException();
-        }
-    }
-
-    public static void main(String[] args) {
-        Grid g = new Grid(4, 4);
-        g.populate(0, 1, 'o');
-        g.populate(0, 3, 'o');
-        g.populate(1, 0, 'o');
-        g.populate(1, 1, 'o');
-        g.populate(1, 3, 'o');
-        g.populate(3, 0, 'o');
-        g.populate(3, 1, 'o');
-        g.populate(3, 3, 'o');
-
-        for (char ch : g.getNeighbors(0, 0)) {
-            System.out.println(ch + " ");
         }
     }
 }
