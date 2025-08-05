@@ -1,0 +1,46 @@
+package model;
+
+public class Generation {
+    private final Grid grid;
+
+    public Generation(Grid grid) {
+        this.grid = grid;
+    }
+
+    // returns the next generation
+    public Generation next() {
+        Grid nextGrid = new Grid(grid);
+
+        for (int i = 0; i < grid.getRows(); ++i) {
+            for (int j = 0; j < grid.getColumns(); ++j) {
+                int numNeighbors = countAliveNeighbors(i, j);
+                boolean alive = grid.at(i, j) == 'O';
+
+                if (alive) {
+                    alive = (numNeighbors == 2 || numNeighbors == 3) ? true : false;
+                } else {
+                    alive = (numNeighbors == 3) ? true : false;
+                }
+
+                nextGrid.populate(i, j, (alive) ? 'O' : ' ');
+            }
+        }
+
+        return new Generation(nextGrid);
+    }
+
+    public void print() {
+        grid.print();
+    }
+
+    private int countAliveNeighbors(int row, int col) {
+        char[] chars = grid.getNeighbors(row, col);
+
+        int alive = 0;
+        for (char ch : chars) {
+            if (ch == 'O') ++alive;
+        }
+
+        return alive;
+    }
+}
