@@ -1,4 +1,5 @@
 package core;
+import java.io.IOException;
 import java.util.Random;
 import model.*;
 
@@ -13,14 +14,6 @@ public class Game {
         this.numGenerations = numGenerations;
     }
 
-    public void printConfig() {
-        System.out.println("GAME OF LIFE CONFIGURATION");
-        System.out.println("ROWS: " + grid.getRows());
-        System.out.println("COLUMNS: " + grid.getColumns());
-        System.out.println("SEED: " + seed);
-        System.out.println("# GENERATIONS: " + numGenerations);
-    }
-
     public void run() {
         Random rd = new Random(seed);
 
@@ -30,16 +23,45 @@ public class Game {
             }
         }
 
+        int ms = 750;
         Generation currentGen = new Generation(grid);
-        System.out.println("Starting Civilization");
-        currentGen.print();
-        System.out.println("\n");
+        print(0, currentGen);
+        sleep(ms);
+        clearTerminal();
 
         for (int i = 1; i <= numGenerations; ++i) {
-            System.out.println("Generation " + i);
             currentGen = currentGen.next();
-            currentGen.print();
-            System.out.println("-".repeat(grid.getColumns()) + "\n");
+            print(i, currentGen);
+            sleep(ms);
+            clearTerminal();
         }
+    }
+
+    private void sleep(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+        }
+    }
+
+    private void clearTerminal() {
+        try {
+            if (System.getProperty("os.name").contains("Windows"))
+                new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
+            else
+                Runtime.getRuntime().exec("clear");
+        }
+        catch (IOException | InterruptedException e) {}
+    }
+
+    private void print(int generationNum, Generation generation) {
+        System.out.println("GAME OF LIFE CONFIGURATION");
+        System.out.println("ROWS: " + grid.getRows());
+        System.out.println("COLUMNS: " + grid.getColumns());
+        System.out.println("SEED: " + seed);
+        System.out.println("# GENERATIONS: " + numGenerations);
+
+        System.out.println("GENERATION: " + generationNum);
+        generation.print();
     }
 }
