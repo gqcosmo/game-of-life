@@ -34,6 +34,20 @@ public class Generation {
         grid.print();
     }
 
+    public int getAlive() {
+        int numAlive = 0;
+
+        for (int i = 0; i < grid.getRows(); ++i) {
+            for (int j = 0; j < grid.getColumns(); ++j) {
+                if (grid.at(i, j) == 'O') {
+                    ++numAlive;
+                }
+            }
+        }
+
+        return numAlive;
+    }
+
     private int countAliveNeighbors(int row, int col) {
         char[] chars = grid.getNeighbors(row, col);
 

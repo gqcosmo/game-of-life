@@ -23,7 +23,7 @@ public class Game {
             }
         }
 
-        int ms = 750;
+        int ms = 250;
         Generation currentGen = new Generation(grid);
         print(0, currentGen);
         sleep(ms);
@@ -55,13 +55,13 @@ public class Game {
     }
 
     private void print(int generationNum, Generation generation) {
-        System.out.println("GAME OF LIFE CONFIGURATION");
         System.out.println("ROWS: " + grid.getRows());
         System.out.println("COLUMNS: " + grid.getColumns());
         System.out.println("SEED: " + seed);
         System.out.println("# GENERATIONS: " + numGenerations);
 
         System.out.println("GENERATION: " + generationNum);
+        System.out.println("ALIVE: " + generation.getAlive());
         generation.print();
     }
 }

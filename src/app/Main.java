@@ -3,8 +3,8 @@ import core.Game;
 
 public class Main {
     public static void main(String[] args) {
-        final int ROWS = 10;
-        final int COLUMNS = 10;
+        final int ROWS = 40;
+        final int COLUMNS = 20;
         final long SEED = System.currentTimeMillis();
         final int ITERS = 1000;
 
