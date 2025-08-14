@@ -8,7 +8,7 @@ public class GamePanel extends JPanel {
 
     public GamePanel(Grid grid) {
         this.grid = grid;
-        setPreferredSize(new Dimension(400, 400));
+        setPreferredSize(new Dimension(700, 700));
     }
 
     @Override
