@@ -43,13 +43,12 @@ public class Grid {
 
     public char[] getNeighbors(int row, int col) {
         validateCoord(row, col);
-        char[] neighbors = new char[8];
-
         int[][] directions = {
                 {-1, -1}, {-1, 0}, {-1, 1},
                 { 0, -1},          {0,  1},
                 { 1, -1}, {1,  0}, {1,  1}
         };
+        char[] neighbors = new char[directions.length];
 
         for (int i = 0; i < directions.length; ++i) {
             int[] dir = directions[i];

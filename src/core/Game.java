@@ -1,7 +1,8 @@
 package core;
-import java.io.IOException;
 import java.util.Random;
 import model.*;
+import controller.Controller;
+import view.Window;
 
 public class Game {
     private final Grid grid;
@@ -23,45 +24,8 @@ public class Game {
             }
         }
 
-        int ms = 250;
-        Generation currentGen = new Generation(grid);
-        print(0, currentGen);
-        sleep(ms);
-        clearTerminal();
-
-        for (int i = 1; i <= numGenerations; ++i) {
-            currentGen = currentGen.next();
-            print(i, currentGen);
-            sleep(ms);
-            clearTerminal();
-        }
-    }
-
-    private void sleep(int milliseconds) {
-        try {
-            Thread.sleep(milliseconds);
-        } catch (InterruptedException e) {
-        }
-    }
-
-    private void clearTerminal() {
-        try {
-            if (System.getProperty("os.name").contains("Windows"))
-                new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
-            else
-                Runtime.getRuntime().exec("clear");
-        }
-        catch (IOException | InterruptedException e) {}
-    }
-
-    private void print(int generationNum, Generation generation) {
-        System.out.println("ROWS: " + grid.getRows());
-        System.out.println("COLUMNS: " + grid.getColumns());
-        System.out.println("SEED: " + seed);
-        System.out.println("# GENERATIONS: " + numGenerations);
-
-        System.out.println("GENERATION: " + generationNum);
-        System.out.println("ALIVE: " + generation.getAlive());
-        generation.print();
+        Generation currentGen = new Generation(grid, 0);
+        Controller controller = new Controller(currentGen, new Window(currentGen));
+        controller.start(numGenerations);
     }
 }

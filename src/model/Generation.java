@@ -2,9 +2,11 @@ package model;
 
 public class Generation {
     private final Grid grid;
+    private final int genNum;
 
-    public Generation(Grid grid) {
+    public Generation(Grid grid, int genNum) {
         this.grid = grid;
+        this.genNum = genNum;
     }
 
     // returns the next generation
@@ -27,11 +29,7 @@ public class Generation {
             }
         }
 
-        return new Generation(nextGrid);
-    }
-
-    public void print() {
-        grid.print();
+        return new Generation(nextGrid, genNum + 1);
     }
 
     public int getAlive() {
@@ -46,6 +44,14 @@ public class Generation {
         }
 
         return numAlive;
+    }
+
+    public Grid getGrid() {
+        return grid;
+    }
+
+    public int getGenNum() {
+        return genNum;
     }
 
     private int countAliveNeighbors(int row, int col) {
