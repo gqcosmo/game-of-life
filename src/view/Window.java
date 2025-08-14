@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.Random;
 import model.Generation;
 import model.Grid;
+import utils.GameConstants;
 
 public class Window extends JFrame {
     StatsPanel stats;
@@ -15,7 +16,7 @@ public class Window extends JFrame {
         game = new GamePanel(generation.getGrid());
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(800, 800);
+        setSize(GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
         setLocationRelativeTo(null);
         setResizable(false);
 

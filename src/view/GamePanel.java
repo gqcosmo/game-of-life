@@ -2,13 +2,14 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 import model.Grid;
+import utils.GameConstants;
 
 public class GamePanel extends JPanel {
     private Grid grid;
 
     public GamePanel(Grid grid) {
         this.grid = grid;
-        setPreferredSize(new Dimension(700, 700));
+        setPreferredSize(new Dimension((int)(GameConstants.SCREEN_WIDTH * .9), (int)(GameConstants.SCREEN_HEIGHT * .9)));
     }
 
     @Override
@@ -29,8 +30,8 @@ public class GamePanel extends JPanel {
                 g.setColor(grid.at(i, j) == 'O' ? Color.yellow : Color.lightGray);
                 g.fillRect(xOffset + j * cellSize, yOffset + i * cellSize, cellSize, cellSize);
 
-                g.setColor(Color.BLACK);
-                g.drawRect(xOffset + j * cellSize, yOffset + i * cellSize, cellSize, cellSize);
+//                g.setColor(Color.BLACK);
+//                g.drawRect(xOffset + j * cellSize, yOffset + i * cellSize, cellSize, cellSize);
             }
         }
     }

@@ -35,6 +35,9 @@ public class Controller {
                 if (targetGenerations > 0 && count >= targetGenerations) {
                     timer.stop();
                     return;
+                } else if (generation.getAlive() == 0) {
+                    timer.stop();
+                    return;
                 }
                 step();
                 count++;
